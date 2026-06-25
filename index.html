@@ -1,22 +1,506 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Vivek Singh Portfolio</title>
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vivek. | Vivek Singh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0c0e0d;
+    --bg-panel: #161918;
+    --bg-panel-2: #1c201f;
+    --accent: #4ee8b0;
+    --accent-dim: #3bbf90;
+    --text: #f3f5f4;
+    --text-dim: #9aa19d;
+    --border: #2a2f2d;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3,.logo{font-family:'Poppins', sans-serif;}
+  a{text-decoration:none; color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%; display:block;}
+  .container{max-width:1180px; margin:0 auto; padding:0 32px;}
+  .eyebrow{
+    text-align:center; text-transform:uppercase; letter-spacing:2px;
+    font-size:12px; color:var(--text-dim); margin-bottom:6px;
+  }
+  .section-title{
+    text-align:center; font-size:32px; font-weight:600; margin-bottom:48px;
+  }
+  .section-title span{color:var(--accent);}
 
+  /* NAVBAR */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(12,14,13,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 32px; max-width:1180px; margin:0 auto;
+  }
+  .logo{font-size:22px; font-weight:700; color:#fff;}
+  .logo::after{content:'.'; color:var(--accent);}
+  .nav-links{display:flex; gap:36px; font-size:15px; font-weight:500;}
+  .nav-links a{color:var(--text); transition:color .2s;}
+  .nav-links a.active, .nav-links a:hover{color:var(--accent);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--accent); color:#06140f; font-weight:600;
+    padding:11px 22px; border-radius:8px; font-size:14px;
+    border:none; cursor:pointer; transition:transform .2s, background .2s;
+  }
+  .btn:hover{background:#5ff5bd; transform:translateY(-2px);}
+  .btn-outline{
+    background:transparent; border:1px solid var(--accent); color:var(--accent);
+  }
+  .btn-outline:hover{background:rgba(78,232,176,.1); transform:translateY(-2px);}
+
+  /* HERO */
+  .hero{
+    text-align:center; padding:110px 32px 90px;
+    position:relative; overflow:hidden;
+  }
+  .hero::before{
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 600px 300px at 50% 0%, rgba(78,232,176,.08), transparent 70%);
+    pointer-events:none;
+  }
+  .hero h1{
+    font-size:40px; font-weight:600; margin-bottom:18px; position:relative;
+  }
+  .hero h1 .accent{color:var(--accent); font-weight:700;}
+  .hero p{
+    max-width:560px; margin:0 auto 28px; color:var(--text-dim); font-size:16px; position:relative;
+  }
+  .hero p .accent{color:var(--accent); font-weight:600;}
+  .socials{
+    display:flex; justify-content:center; gap:14px; position:relative;
+  }
+  .socials a{
+    width:42px; height:42px; border-radius:50%; background:var(--bg-panel);
+    border:1px solid var(--border); display:flex; align-items:center; justify-content:center;
+    transition:all .2s;
+  }
+  .socials a:hover{background:var(--accent); border-color:var(--accent); transform:translateY(-3px);}
+  .socials svg{width:18px; height:18px; fill:var(--text);}
+  .socials a:hover svg{fill:#06140f;}
+
+  /* SERVICES */
+  .services{padding:90px 0 0;}
+  .service-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .service-card{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:14px;
+    padding:28px; position:relative; overflow:hidden;
+    transition:transform .35s ease, border-color .35s ease, background .35s ease, color .35s ease;
+  }
+  .service-card:hover{
+    transform:translateY(-6px);
+    border-color:var(--accent);
+    background:var(--accent);
+    color:#06140f;
+  }
+  .service-card .service-icon{transition:background .35s ease;}
+  .service-card:hover .service-icon{background:rgba(0,0,0,.12);}
+  .service-card:hover .service-icon svg{stroke:#06140f !important;}
+  .service-card .rule{width:30px; height:2px; background:rgba(255,255,255,.3); margin-bottom:14px; transition:background .35s ease;}
+  .service-card:hover .rule{background:rgba(0,0,0,.3);}
+  .service-num{
+    position:absolute; top:14px; right:20px; font-size:34px; font-weight:700;
+    color:rgba(255,255,255,.15); transition:color .35s ease;
+  }
+  .service-card:hover .service-num{color:#ffffff;}
+  .service-card h3{font-size:17px; font-weight:600; margin-bottom:10px; color:var(--text); transition:color .35s ease;}
+  .service-card:hover h3{color:#06140f;}
+  .service-card p{font-size:13.5px; color:var(--text-dim); line-height:1.7; transition:color .35s ease;}
+  .service-card:hover p{color:rgba(6,20,15,.75);}
+  .service-icon{
+    width:44px; height:44px; border-radius:10px; background:rgba(255,255,255,.06);
+    display:flex; align-items:center; justify-content:center; margin-bottom:18px;
+    transition:background .35s ease;
+  }
+  .service-icon svg{width:22px; height:22px;}
+
+  /* PROJECTS */
+  .projects{padding:100px 0;}
+  .project-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+    justify-content:center;
+  }
+  .project-card{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:14px;
+    overflow:hidden; transition:transform .35s ease, border-color .35s ease;
+  }
+  .project-card:hover{transform:translateY(-6px); border-color:var(--accent);}
+  .project-thumb{
+    aspect-ratio:4/3; background:linear-gradient(135deg,#cfeae6,#a9d6cf);
+    display:flex; align-items:center; justify-content:center; position:relative;
+  }
+  .project-thumb .mock{
+    width:78%; background:#fff; border-radius:8px; padding:14px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25); font-size:9px; color:#2b6f63;
+  }
+  .project-thumb .mock .ring{
+    width:36px; height:36px; border-radius:50%; border:5px solid #2bbfa0;
+    border-right-color:#e2e8e6; margin:8px auto;
+  }
+  .project-body{
+    padding:20px 22px 24px;
+    background:var(--bg-panel);
+    transition:background .35s ease, color .35s ease;
+  }
+  .project-card:hover .project-body{background:var(--accent);}
+  .project-body h4{font-size:16px; font-weight:600; margin-bottom:8px; transition:color .35s ease;}
+  .project-card:hover .project-body h4{color:#06140f;}
+  .project-body p{font-size:13px; color:var(--text-dim); transition:color .35s ease;}
+  .project-card:hover .project-body p{color:rgba(6,20,15,.75);}
+
+  /* ABOUT */
+  .about{padding:100px 0;}
+  .about-grid{
+    display:grid; grid-template-columns:340px 1fr; gap:60px; align-items:center; margin-bottom:90px;
+  }
+  .about-photo{
+    position:relative; width:300px; height:300px; margin:0 auto;
+  }
+  .about-photo .ring{
+    position:absolute; inset:-14px; border:1px dashed var(--accent); border-radius:50%; opacity:.5;
+  }
+  .about-photo img{
+    width:100%; height:100%; object-fit:cover; border-radius:50%; border:2px solid var(--border);
+  }
+  .badge{
+    position:absolute; width:38px; height:38px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px;
+    box-shadow:0 6px 16px rgba(0,0,0,.4);
+  }
+  .badge.js{ background:#f0db4f; color:#222; top:5%; right:0;}
+  .badge.html{ background:#e34c26; color:#fff; top:30%; left:-5%; font-size:11px;}
+  .badge.react{ background:#1b2330; color:#61dafb; border:1px solid #61dafb; bottom:18%; left:-5%;}
+  .badge.code{ background:#3b5cf0; color:#fff; bottom:0; right:8%;}
+  .about-copy p{color:var(--text-dim); font-size:14.5px; margin-bottom:16px;}
+  .about-copy .btn{margin-top:6px;}
+
+  .skills-grid{display:grid; grid-template-columns:1fr 1.3fr; gap:60px; align-items:center;}
+  .skills-grid p{color:var(--text-dim); font-size:14.5px;}
+  .pill-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .pill{
+    border:1px solid var(--border); border-radius:50px; padding:22px 10px;
+    text-align:center; font-size:13px; font-weight:600; letter-spacing:.5px;
+    transition:all .25s;
+  }
+  .pill:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-3px);}
+  .pill.square{border-radius:14px;}
+
+  /* CONTACT */
+  .contact{padding:100px 0; position:relative; overflow:hidden;}
+  .contact::before{
+    content:''; position:absolute; right:-10%; top:0; width:500px; height:500px;
+    background:radial-gradient(circle, rgba(78,232,176,.08), transparent 70%);
+    pointer-events:none;
+  }
+  .contact > .container > p{
+    text-align:center; max-width:480px; margin:0 auto 50px; color:var(--text-dim); font-size:15px;
+  }
+  .contact-panel{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:18px;
+    display:grid; grid-template-columns:1fr 1.3fr; position:relative; z-index:1;
+  }
+  .contact-info{padding:48px;}
+  .contact-info h3{font-size:20px; font-weight:600; margin-bottom:6px;}
+  .contact-info .discuss{color:var(--accent); font-weight:600; margin-bottom:32px; display:block;}
+  .contact-row{display:flex; align-items:center; gap:14px; margin-bottom:18px; font-size:14px;}
+  .contact-row .ic{
+    width:36px; height:36px; border-radius:50%; background:var(--bg-panel-2);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .contact-row a, .contact-row span{color:var(--text-dim);}
+  .contact-row a.phone{color:var(--text-dim);}
+  .contact-form{padding:48px; border-left:1px solid var(--border);}
+  .field{margin-bottom:18px;}
+  .field label{display:block; font-size:13px; margin-bottom:8px; color:var(--text-dim);}
+  .field input, .field textarea{
+    width:100%; background:var(--bg); border:1px solid var(--border); border-radius:8px;
+    padding:13px 16px; color:var(--text); font-family:inherit; font-size:14px;
+    transition:border-color .2s;
+  }
+  .field input:focus, .field textarea:focus{outline:none; border-color:var(--accent);}
+  .field textarea{resize:vertical; min-height:90px;}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--border); padding:50px 0;}
+  .footer-grid{
+    display:grid; grid-template-columns:1fr 1fr 1fr; gap:30px; align-items:start;
+  }
+  .footer-col h5{font-size:13px; color:var(--text-dim); margin-bottom:14px; text-transform:uppercase; letter-spacing:1px;}
+  .footer-col ul li{margin-bottom:10px; font-size:14px; color:var(--text-dim);}
+  .footer-col ul li a:hover{color:var(--accent);}
+  .footer-socials{display:flex; gap:12px; margin-top:6px;}
+  .footer-socials a{
+    width:34px; height:34px; border-radius:50%; background:var(--bg-panel);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .footer-socials svg{width:15px; height:15px; fill:var(--text-dim);}
+
+  @media (max-width: 900px){
+    .nav-links{display:none;}
+    .service-grid, .project-grid{grid-template-columns:1fr;}
+    .about-grid, .skills-grid{grid-template-columns:1fr; gap:36px;}
+    .contact-panel{grid-template-columns:1fr;}
+    .contact-form{border-left:none; border-top:1px solid var(--border);}
+    .footer-grid{grid-template-columns:1fr; text-align:center;}
+    .footer-socials{justify-content:center;}
+    .pill-grid{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
 <body>
 
-<h1>Vivek Singh</h1>
+<header>
+  <nav>
+    <a href="#" class="logo">Vivek</a>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#projects">Featured projects</a></li>
+      <li><a href="#about">About me</a></li>
+      <li><a href="#contact">Contact me</a></li>
+    </ul>
+    <a href="https://drive.google.com/file/d/1dIrDpD4ATdBzpufICYdEdQ5xzEzS0x_o/view?usp=sharing" target="_blank" class="btn">View Resume</a>
+  </nav>
+</header>
 
-<p>Data Analyst | Data Engineer</p>
+<section class="hero" id="home">
+  <div class="container">
+    <h1>Hi, I am <span class="accent">Vivek Singh</span></h1>
+    <p>A <span class="accent">Python Developer &amp; Data Analyst</span> turning raw data into actionable insights through analysis, automation, and clean code. Let's build something data-driven!</p>
+    <div class="socials">
+      <a href="https://github.com/viveksingh12061999" target="_blank" aria-label="Github"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.03-.01-1.87-2.78.61-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.9 1.57 2.36 1.11 2.93.85.09-.67.35-1.11.64-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.32 9.32 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></a>
+      <a href="https://www.linkedin.com/in/vivek-singh-12061999/" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.22 8.25h4.56V23H.22V8.25zM8.34 8.25h4.37v2.01h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 6.99V23h-4.56v-6.93c0-1.65-.03-3.78-2.3-3.78-2.3 0-2.65 1.8-2.65 3.66V23H8.34V8.25z"/></svg></a>
+      
+      <a href="https://x.com/Vivek85431815" target="_blank" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.261 5.632 5.903-5.632Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    </div>
+  </div>
+</section>
 
-<h2>Projects</h2>
+<section class="services">
+  <div class="container">
+    <p class="eyebrow">Services</p>
+    <h2 class="section-title">What <span>I do</span>.</h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <span class="service-num">01</span>
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#4ee8b0" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div>
+        <h3>Python Development</h3>
+        <div class="rule"></div>
+        <p>Building robust applications and automation tools using Python, Pandas, NumPy, and Streamlit — from data pipelines to interactive dashboards.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">02</span>
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#4ee8b0" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 3 3 5-6"/></svg></div>
+        <h3>Data Analysis</h3>
+        <div class="rule"></div>
+        <p>Transforming raw, unstructured data into actionable insights through analysis, reporting, and visualization using SQL, Excel, and Matplotlib.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">03</span>
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#4ee8b0" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3zM18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg></div>
+        <h3>Workflow Automation</h3>
+        <div class="rule"></div>
+        <p>Designing automated systems for data processing, OCR digitization, and database-driven workflows that save time and reduce manual errors.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<ul>
-    <li>Retail Analytics Platform</li>
-    <li>Customer Churn Analysis</li>
-    <li>Sales Dashboard</li>
-</ul>
+<section class="projects" id="projects">
+  <div class="container">
+    <p class="eyebrow">Portfolio</p>
+    <h2 class="section-title">Featured <span>projects</span>.</h2>
+    <div class="project-grid" id="project-grid"></div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="container">
+    <p class="eyebrow">My Bio</p>
+    <h2 class="section-title">About <span>me</span>.</h2>
+    <div class="about-grid" style="grid-template-columns:1fr;">
+      <div class="about-copy">
+        <p>Data Analyst aspirant with a B.Tech in Electronics &amp; Communication Engineering from Jaypee Institute of Information Technology (2018–2022) and hands-on experience in Python, SQL, data processing, automation, and frontend development.</p>
+        <p>Skilled at transforming raw data into actionable insights through analysis, reporting, and workflow optimization — with a strong foundation in business analytics, database management, and cloud analytics services.</p>
+        <p>Previously worked as a Quality Assurance Executive at Wipro, validating application data and workflows, and as a Product Assembly Intern at Nuephony, testing neurofeedback devices. GATE Rank 10261/75854 in Data Science and AI.</p>
+        <a href="https://drive.google.com/file/d/1dIrDpD4ATdBzpufICYdEdQ5xzEzS0x_o/view?usp=sharing" target="_blank" class="btn">View Resume</a>
+      </div>
+    </div>
+
+    <div class="skills-grid">
+      <div>
+        <p class="eyebrow" style="text-align:left;">Skills</p>
+        <h2 class="section-title" style="text-align:left; margin-bottom:18px;">Technical <span>skills</span>.</h2>
+        <p>A versatile technical toolkit spanning core programming, data libraries, databases, and development tools — built through real projects in automation, analytics, and IoT.</p>
+      </div>
+      <div class="pill-grid">
+        <div class="pill">PYTHON</div>
+        <div class="pill">JAVASCRIPT</div>
+        <div class="pill">SQL</div>
+        <div class="pill">PANDAS</div>
+        <div class="pill">NUMPY</div>
+        <div class="pill">OPENCV</div>
+        <div class="pill">STREAMLIT</div>
+        <div class="pill">MATPLOTLIB</div>
+        <div class="pill">MYSQL</div>
+        <div class="pill">GIT &amp; GITHUB</div>
+        <div class="pill">EXCEL</div>
+        <div class="pill">VS CODE</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <p class="eyebrow">Get in touch</p>
+    <h2 class="section-title">Contact <span>me</span>.</h2>
+    <p>I am currently open to full-time, contract or part-time opportunities in Front End Development.</p>
+    <div class="contact-panel" style="grid-template-columns:1fr; max-width:520px; margin:0 auto;">
+      <div class="contact-info">
+        <h3>Have an awesome project idea?</h3>
+        <a href="#" class="discuss">Let's Discuss.</a>
+        <div class="contact-row">
+          <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ee8b0" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <a href="tel:+917042432400" class="phone">+91 7042432400</a>
+        </div>
+        <div class="contact-row">
+          <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ee8b0" stroke-width="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></div>
+          <a href="mailto:viveksingh12061999@gmail.com">viveksingh12061999@gmail.com</a>
+        </div>
+        <div class="contact-row">
+          <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ee8b0" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <span>New Delhi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="#" class="logo">Vivek</a>
+        <p style="margin-top:10px; color:var(--text-dim); font-size:14px;">Python Developer<br>Data Analyst</p>
+      </div>
+      <div class="footer-col">
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#projects">My projects</a></li>
+          <li><a href="#about">About me</a></li>
+          <li><a href="#contact">Contact me</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Social Media Handles</h5>
+        <div class="footer-socials">
+          <a href="https://github.com/viveksingh12061999" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.4 9.4 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.69 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.75c0 .26.18.58.69.48A10 10 0 0 0 22 12c0-5.52-4.48-10-10-10z"/></svg></a>
+          <a href="https://x.com/Vivek85431815" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.261 5.632 5.903-5.632Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://www.linkedin.com/in/vivek-singh-12061999/" target="_blank"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.22 8.25h4.56V23H.22V8.25zM8.34 8.25h4.37v2.01h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 6.99V23h-4.56v-6.93c0-1.65-.03-3.78-2.3-3.78-2.3 0-2.65 1.8-2.65 3.66V23H8.34V8.25z"/></svg></a>
+          <a href="https://www.instagram.com/_.viveksingh._/" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="17.5" cy="6.5" r="1.2"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const projectData = [
+    {
+      title: 'OCR Automation System',
+      desc: 'Automated document digitization using the Google Gemini API to extract structured data from screenshots into Excel-ready datasets.',
+      tag: 'Python · Gemini API'
+    },
+    {
+      title: 'IoT-Based Agriculture Monitoring',
+      desc: 'Real-time monitoring solution tracking temperature, humidity, pressure, and sunlight levels in agricultural environments.',
+      tag: 'IoT · Python'
+    },
+    {
+      title: 'Leave Management System',
+      desc: 'Automated employee leave applications, approvals, and balance tracking with role-based access for employees and admins.',
+      tag: 'Python · Streamlit · MySQL'
+    },
+    {
+      title: 'Driver Behaviour Classification',
+      desc: 'Synthetic driving-metrics dataset generator with rule-based event detection, classifying drivers as Safe, Normal, or Aggressive.',
+      tag: 'Python · Pandas'
+    },
+    {
+      title: 'Web Crawler & Image Downloader',
+      desc: 'Crawls up to 100 web pages and downloads unique images using URL normalization, domain filtering, and duplicate detection.',
+      tag: 'BeautifulSoup · Requests'
+    }
+  ];
+  const grid = document.getElementById('project-grid');
+  grid.innerHTML = projectData.map(p => `
+    <div class="project-card">
+      <div class="project-thumb">
+        <div class="mock" style="width:82%;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:700; color:#1c4d44;">${p.tag}</span>
+            <div style="width:16px; height:16px; border-radius:50%; background:#2bbfa0;"></div>
+          </div>
+          <div style="height:6px; background:#e7f3f0; border-radius:3px; margin-bottom:6px; width:90%;"></div>
+          <div style="height:6px; background:#e7f3f0; border-radius:3px; margin-bottom:6px; width:75%;"></div>
+          <div style="height:6px; background:#e7f3f0; border-radius:3px; margin-bottom:10px; width:60%;"></div>
+          <div style="display:flex; gap:4px;">
+            <div style="flex:1; height:30px; background:#e7f3f0; border-radius:4px;"></div>
+            <div style="flex:1; height:30px; background:#e7f3f0; border-radius:4px;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <h4>${p.title}</h4>
+        <p>${p.desc}</p>
+      </div>
+    </div>
+  `).join('');
+</script>
+
+<script>
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const setActive = (id) => {
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+    });
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setActive(entry.target.id);
+      }
+    });
+  }, {
+    rootMargin: '-40% 0px -55% 0px',
+    threshold: 0
+  });
+
+  sections.forEach(section => observer.observe(section));
+</script>
 
 </body>
 </html>
